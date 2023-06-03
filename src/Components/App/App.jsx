@@ -1,10 +1,12 @@
 import Header from '../Header/Header'
+import InputNumber from '../Number/Number';
 
 function App() {
-  return (
-	<div className="mx-auto border-2 border-rose-500 max-w-7xl">
-		<Header />
-	</div>		
+	return (
+		<div className="mx-auto max-w-8xl">
+			<Header />
+			<InputNumber />
+		</div>
 	);
 }
 
