@@ -1,47 +1,47 @@
 const products = [
     {
         name: 'Bichectomia',
-        id: 01,
+        id: 1,
         value: 700,
     },
     {
         name: 'Bleferosplatia',
-        id: 02,
+        id: 2,
         value: 2000,
     },
     {
         name: 'Lipo de Papada Cirúrgica',
-        id: 03,
+        id: 3,
         value: 1000,
     },
     {
         name: 'Microagulhamento',
-        id: 04,
+        id: 4,
         value: 500,
     },
     {
         name: 'Brow lift (sem fio incluso)',
-        id: 05,
+        id: 5,
         value: 2000,
     },
     {
         name: 'Lip Lifting',
-        id: 06,
+        id: 6,
         value: 120,
     },
     {
         name: 'Skinbooster',
-        id: 07,
+        id: 7,
         value: 700,
     },
     {
         name: 'Vitalize Lips',
-        id: 08,
+        id: 8,
         value: 120,
     },
     {
         name: 'Preenchedor Rennova Plus Lido',
-        id: 09,
+        id: 9,
         value: 1450,
     },
     {

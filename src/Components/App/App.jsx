@@ -1,11 +1,11 @@
 import Header from '../Header/Header'
-import InputNumber from '../Number/Number';
+import Products from '../Products/Products';
 
 function App() {
 	return (
 		<div className="mx-auto max-w-8xl">
 			<Header />
-			<InputNumber />
+			<Products />
 		</div>
 	);
 }
