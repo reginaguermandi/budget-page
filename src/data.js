@@ -47,7 +47,7 @@ const products = [
     {
         name: 'Preenchedor Rennova Ultra Volume',
         id: 10,
-        value: 2.400,
+        value: 2400,
     },
     {
         name: 'Preenchedor Ultra Volume Plus',

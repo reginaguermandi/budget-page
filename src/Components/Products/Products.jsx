@@ -38,28 +38,40 @@ export default function Products() {
         setParcelValue(parcelValue);
     };
 
+    const handleReset = () => {
+        setQuantities({});
+        setDiscount(0);
+        setTotalDiscount(0);
+        setParcelValue(0);
+    };
+
     return (
         <div>
-            <h2>Lista de Produtos</h2>
-            <ul>
-                {products.map((product, index) => (
-                    <li key={index}>
-                        {product.name} - R${product.value.toFixed(2)}
-                        <input className='border-2 border-neutral-950 w-20 h-10'
-                            type="number"
-                            min="0"
-                            value={quantities[product.name] || ''}
-                            onChange={(event) =>
-                                handleQuantityChange(product.name, event.target.value)
-                            }
-                        />
-                    </li>
-                ))}
-            </ul>
-            <div>
-                <label>
+            <h2 className='my-10 mx-auto text-center text-xl md:text-4xl md:m-5'>Lista de Produtos</h2>
+            <div className='px-5 md:px-24'>
+                <ul className='md:grid md:grid-cols-2'>
+                    {products.map((product, index) => (
+                        <li className='grid grid-cols-2 md:py-2' key={index}>
+                            <label className=''>{product.name} - R${product.value.toFixed(2)}</label>
+
+
+                            <input className='translate-x-14 border-2 border-neutral-950 w-20 h-10'
+                                type="number"
+                                min="0"
+                                value={quantities[product.name] || ''}
+                                onChange={(event) =>
+                                    handleQuantityChange(product.name, event.target.value)
+                                }
+
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className='my-10 mx-auto text-center '>
+                <label className='text-3xl'>
                     Desconto (%):
-                    <input className='border-2 border-lime-500'
+                    <input className='border-none border-lime-500 w-20 h-10'
                         type="number"
                         min="0"
                         value={discount}
@@ -67,12 +79,13 @@ export default function Products() {
                     />
                 </label>
             </div>
-            <button className='border-2 border-black p-5'
-                onClick={handleSubmit}>Submit</button>
+            <button className='border-2 border-black p-2' onClick={handleSubmit}>Calcular</button>
+            <button className='border-2 border-black p-2' onClick={handleReset}>Reset</button>
+
             {totalDiscount !== 0 && (
                 <div>
                     <p>Total com Desconto: R${totalDiscount.toFixed(2)}</p>
-                    <p>Valor das Parcelas: R${parcelValue}</p>
+                    <p>Valor das Parcelas: 3 X R${parcelValue}</p>
                 </div>
             )}
         </div>
