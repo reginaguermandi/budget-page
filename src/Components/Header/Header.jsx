@@ -16,12 +16,7 @@ export default function Header() {
 					</h1>
 				</div>
 			</div>
-			<div >
-				<h2 className="absolute z-10 ml-5 translate-y-16  text-2xl text-white md:translate-y-56 md:ml-24 md:text-4xl">Orçamento</h2>
-				<img className="md:relative "
-					src="https://facop.edu.br/wp-content/themes/naitech_facop/img/bg-cursos-default.jpg"
-					alt="students walking together" />
-			</div>
+
 		</header>
 	);
 }
