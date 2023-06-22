@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import fixedProducts from '../../fixedProducts';
-import flexibleProducts from '../../flexibleProducts';
+import React, { useState, useEffect } from 'react';
+import products from '../../products';
 
 export default function Products() {
     const [quantities, setQuantities] = useState({});
     const [discount, setDiscount] = useState(0);
-    const [totalDiscount, setTotalDiscount] = useState(0);
-    const [parcelValue, setParcelValue] = useState(0);
+    const [totalWithDiscount, setTotalWithDiscount] = useState(0);
+    const [installmentValue, setInstallmentValue] = useState(0);
 
     const handleQuantityChange = (productName, quantity) => {
-        setQuantities((prevQuantity) => ({
-            ...prevQuantity,
+        setQuantities((prevQuantities) => ({
+            ...prevQuantities,
             [productName]: quantity,
         }));
     };
@@ -23,31 +22,35 @@ export default function Products() {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        let totalWithDiscount = 0;
+        let totalWithoutDiscount = 0;
+        let installmentValue = 0;
 
-        // Logic to add the values with the selected quantities and apply the discount
-        let total = 0;
-        for (const product of flexibleProducts) {
+        for (const product of products) {
             const quantity = quantities[product.name] || 0;
-            total += product.value * quantity;
+            const subtotal = product.price * quantity;
+
+            totalWithoutDiscount += subtotal;
+            totalWithDiscount += subtotal;
         }
-        const decimalDiscount = parseFloat(discount) / 100;
-        const discountValue = total * decimalDiscount;
-        const totalDiscount = total - discountValue;
 
-        // Logic to calculate the value of the installments
-        const parcelValue = (totalDiscount / 3).toFixed(2);
+        const discountDecimal = parseFloat(discount) / 100;
+        const discountAmount = totalWithoutDiscount * discountDecimal;
+        totalWithDiscount -= discountAmount;
 
-        setTotalDiscount(totalDiscount);
-        setParcelValue(parcelValue);
+        installmentValue = totalWithDiscount / 3;
+
+        setTotalWithDiscount(totalWithDiscount);
+        setInstallmentValue(installmentValue.toFixed(2));
     };
 
     const handleReset = () => {
         setQuantities({});
         setDiscount(0);
-        setTotalDiscount(0);
-        setParcelValue(0);
+        setTotalWithDiscount(0);
+        setInstallmentValue(0);
     };
 
     return (
@@ -55,16 +58,16 @@ export default function Products() {
             <h2 className='my-10 mx-auto text-center text-xl md:text-4xl md:m-5'>Produtos</h2>
             <div className='px-5 md:px-24'>
                 <ul className='md:grid md:grid-cols-2'>
-                    {flexibleProducts.map((flexibleProduct, index) => (
+                    {products.map((product, index) => (
                         <li className='grid grid-cols-2 py-2 items-center' key={index}>
-                            <label className=''>{flexibleProduct.name} - R${flexibleProduct.value.toFixed(2)}</label>
+                            <label className=''>{product.name} - R${product.price.toFixed(2)}</label>
 
                             <input className='translate-x-14 border-2 border-gray-700 w-20 h-10 text-center'
                                 type="number"
                                 min="0"
-                                value={quantities[flexibleProduct.name] || ''}
+                                value={quantities[product.name] || ''}
                                 onChange={(event) =>
-                                    handleQuantityChange(flexibleProduct.name, event.target.value)
+                                    handleQuantityChange(product.name, event.target.value)
                                 }
                             />
                         </li>
@@ -94,10 +97,10 @@ export default function Products() {
                     </div>
                 </div>
                 <div className='flex-col justify-center'>
-                    {totalDiscount !== 0 && (
+                    {totalWithDiscount !== 0 && (
                         <div className='mx-auto text-center'>
-                            <p className='text-xl'>Total com Desconto: R${totalDiscount.toFixed(2)}</p>
-                            <p className='text-xl'>Valor das Parcelas: 3 X R${parcelValue}</p>
+                            <p className='text-xl'>Total com Desconto: R${totalWithDiscount.toFixed(2)}</p>
+                            <p className='text-xl'>Valor das Parcelas: 3 X R${installmentValue}</p>
                         </div>
                     )}
                 </div>
