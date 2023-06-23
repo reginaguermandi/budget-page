@@ -6,6 +6,7 @@ export default function ProductList() {
     const [discount, setDiscount] = useState(0);
     const [totalDiscount, setTotalDiscount] = useState(0);
     const [parcelValue, setParcelValue] = useState(0);
+    const [installments, setInstallments] = useState(3);
 
     const handleQuantityChange = (productName, quantity) => {
         setQuantities((prevQuantity) => ({
@@ -16,6 +17,10 @@ export default function ProductList() {
 
     const handleDiscountChange = (event) => {
         setDiscount(event.target.value);
+    };
+
+    const handleInstallmentsChange = (event) => {
+        setInstallments(parseInt(event.target.value));
     };
 
     const handleSubmit = (e) => {
@@ -32,7 +37,7 @@ export default function ProductList() {
         const totalDiscount = total - discountValue;
 
         // Logic to calculate the value of the installments
-        const parcelValue = (totalDiscount / 3).toFixed(2);
+        const parcelValue = (totalDiscount / installments).toFixed(2);
 
         setTotalDiscount(totalDiscount);
         setParcelValue(parcelValue);
@@ -47,9 +52,14 @@ export default function ProductList() {
 
     return (
         <div>
-            <h2 className='my-10 mx-auto text-center text-3xl'>Produtos</h2>
+            <h2 className='my-10 mx-auto text-center text-3xl'>Produtos e Materiais</h2>
             <div>
-                <div className='mx-16 text-center'>
+                <p className='my-10 mx-auto text-center'>
+                    Obs: Conforme tabela de descontos: 50% Á Vista | 30% Parcelado
+                </p>
+            </div>
+            <div>
+                <div className='text-center md:mx-16'>
                     <ul className='md:grid md:grid-cols-2 '>
                         {products.map((product, index) => (
                             <li className='p-10 text-left text-xl border-2' key={index}>
@@ -73,16 +83,28 @@ export default function ProductList() {
                         ))}
                     </ul>
                     <div className='my-10 text-center md:grid md:grid-cols-2 items-center'>
-                        <div className='discount-container'>
-                            <div>
-                                <label className='px-2 text-3xl text-green-700'>Desconto (%):</label>
-                                <input className='w-20 h-10 text-center text-3xl text-green-700 border-2 border-gray-700 focus:outline-none focus:border-green-500'
-                                    type="number"
-                                    min="0"
-                                    max="100"
-                                    value={discount}
-                                    onChange={handleDiscountChange}
-                                />
+                        <div>
+                            <div className='grid grid-rows-2'>
+                                <label className='my-5 mx-auto text-xl text-green-700 md:text-3xl'>Desconto (%):
+                                    <input className='w-20 h-10 text-center text-3xl text-green-700 border-2 border-gray-700 focus:outline-none focus:border-green-500'
+                                        type="number"
+                                        min="0"
+                                        max="100"
+                                        value={discount}
+                                        onChange={handleDiscountChange}
+                                    />
+                                </label>
+                                <label className='mx-auto text-xl md:text-3xl'>
+                                    Quant. de Parcelas:
+                                    <input
+                                        className='w-20 h-10 text-center text-3xl border-2 mx-2 border-black'
+                                        type="number"
+                                        min="1"
+                                        max="10"
+                                        value={installments}
+                                        onChange={handleInstallmentsChange}
+                                    />
+                                </label>
 
                             </div>
                             <div className='inline-flex my-5'>
@@ -92,13 +114,14 @@ export default function ProductList() {
                                 <div className='px-2'>
                                     <button className='py-2 px-6 bg-purple-900 border-2 border-purple-900 text-white hover:bg-white hover:text-black hover:border-2 hover:border-black' onClick={handleReset}>Resetar</button>
                                 </div>
+
                             </div>
                         </div>
-                        <div className='flex-col justify-center'>
+                        <div className='flex-col justify-center text-3xl'>
                             {totalDiscount !== 0 && (
                                 <div>
                                     <p>Total com Desconto: R${totalDiscount.toFixed(2)}</p>
-                                    <p>Valor das Parcelas: 3 X R${parcelValue}</p>
+                                    <p>Parcelas: R${parcelValue}</p>
                                 </div>
                             )}
                         </div>
