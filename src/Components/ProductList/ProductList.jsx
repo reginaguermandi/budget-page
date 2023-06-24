@@ -107,7 +107,7 @@ export default function ProductList() {
                                 </label>
 
                             </div>
-                            <div className='inline-flex my-5'>
+                            <div className='inline-flex my-5 pb-10'>
                                 <div className='px-2'>
                                     <button className='py-2 px-4 bg-purple-900 border-2 border-purple-900 text-white hover:bg-white hover:text-black hover:border-2 hover:border-black' onClick={handleSubmit}>Calcular</button>
                                 </div>
@@ -125,8 +125,15 @@ export default function ProductList() {
                                 </div>
                             )}
                         </div>
+
                     </div>
                 </div>
+            </div>
+            <div>
+                <p className='relative bottom-0 text-center text-gray-500 text-xs'>Developed by:
+                    <a href='https://www.linkedin.com/in/reginaguermandi/' className='px-2 text-blue-600 text underline'>Regina G. Nascimento</a>
+                    &hearts;
+                </p>
             </div>
         </div>
     )
