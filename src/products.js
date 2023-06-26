@@ -7,12 +7,12 @@ const products = [
     {
         name: 'Fio Liso Agulhado',
         id: 2,
-        price: 335,
+        price: 350,
     },
     {
         name: 'Fio de Tração Especulado',
         id: 3,
-        price: 600,
+        price: 300,
     },
     {
         name: 'Fios Múltiplos',
@@ -32,7 +32,7 @@ const products = [
     {
         name: 'Skinbooster',
         id: 7,
-        price: 700,
+        price: 450,
     },
     {
         name: 'Preenchedor Rennova Plus Lido',
@@ -82,7 +82,7 @@ const products = [
     {
         name: 'Bioestimulador BIOMETIL',
         id: 17,
-        price: 3900,
+        price: 600,
     },
     {
         name: 'Bichectomia',
@@ -140,6 +140,12 @@ const products = [
         id: 28,
         price: 69,
     },
+    {
+        name: 'Preenchedor EPQT',
+        id: 29,
+        price: 1600,
+    },
+
 ];
 
 export default products
